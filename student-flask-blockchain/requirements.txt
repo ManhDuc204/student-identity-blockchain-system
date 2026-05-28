@@ -1,0 +1,16 @@
+Flask==3.0.3
+Flask-Session==0.8.0
+Flask-SQLAlchemy==3.1.1
+Werkzeug==3.0.3
+web3==6.17.2
+
+Pillow==10.4.0
+qrcode==7.4.2
+opencv-python==4.10.0.84
+reportlab==4.2.2
+PyPDF2==3.0.1
+mysql-connector-python==9.0.0
+python-dotenv==1.0.1
+requests==2.32.3
+cryptography==43.0.1
+

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Tx Logs{% endblock %}
+{% block content %}
+  <div class="card">
+    <div style="font-weight:900; margin-bottom:10px;">Recent Transactions</div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Action</th>
+          <th>Tx Hash</th>
+          <th>Student ID</th>
+          <th>Block</th>
+          <th>Gas</th>
+          <th>Timestamp</th>
+        </tr>
+
+      </thead>
+      <tbody>
+        {% for l in logs %}
+          <tr>
+            <td>{{ l.id }}</td>
+            <td>{{ l.action or '-' }}</td>
+            <td style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size:12px;">{{ l.tx_hash }}</td>
+
+            <td>{{ l.event_student_id }}</td>
+            <td>{{ l.block_number }}</td>
+            <td>{{ l.gas_used }}</td>
+            <td>{{ l.timestamp }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Students{% endblock %}
+{% block content %}
+  <div class="card">
+    <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:12px;">
+      <div>
+        <div style="font-weight:900;">Students</div>
+        <div style="color:var(--muted); font-size:13px;">Search by id, name, or email</div>
+      </div>
+      <form method="GET" action="{{ url_for('students') }}" style="display:flex; gap:10px; align-items:center;">
+        <input name="q" placeholder="Search..." value="{{ request.args.get('q','') }}" style="max-width:360px" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Full Name</th>
+          <th>Class</th>
+          <th>Faculty</th>
+          <th>Email</th>
+          <th>Hash</th>
+          <th>QR</th>
+          <th>Action</th>
+        </tr>
+
+      </thead>
+      <tbody>
+        {% for s in students %}
+          <tr>
+            <td>{{ s.student_id }}</td>
+            <td>{{ s.full_name }}</td>
+            <td>{{ s.student_class }}</td>
+            <td>{{ s.faculty }}</td>
+            <td>{{ s.email }}</td>
+            <td style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size:12px;">{{ s.data_hash[:10] }}...</td>
+            <td>
+              {% if s.qr_filename %}
+                <img src="{{ url_for('static', filename='qr/' ~ s.qr_filename) }}" style="width:70px; height:70px;" />
+              {% else %}-{% endif %}
+            </td>
+            <td>
+              <form method="POST" action="{{ url_for('delete_student_ui', student_id=s.student_id) }}" onsubmit="return confirm('Delete student from SQLite and write DELETED log on blockchain?');">
+                <button type="submit" style="background: #ef4444; color:#fff;">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Verify{% endblock %}
+{% block content %}
+  <div class="card">
+    <div style="font-weight:900; margin-bottom:10px;">Verify Student</div>
+    <form method="POST" action="{{ url_for('verify') }}">
+      <label>Student ID</label>
+      <input name="student_id" required value="{{ request.form.get('student_id','') }}" />
+      <div style="height:14px"></div>
+      <button type="submit">Verify on-chain</button>
+    </form>
+
+    {% if result %}
+      <div style="height:16px"></div>
+      <div class="flash {{ 'success' if result.status=='valid' else ('danger' if result.status=='invalid' else '') }}">
+        <b>Status:</b> {{ result.status }}<br/>
+        {{ result.message }}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
+

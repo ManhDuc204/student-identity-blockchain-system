@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col card">
+      <h2 style="margin:0 0 10px 0;">Dashboard</h2>
+      <div style="color:var(--muted);">Web3 connected: <b>{{ stats.web3_connected }}</b></div>
+      <div style="color:var(--muted);">Latest block: <b>{{ stats.latest_block }}</b></div>
+    </div>
+    <div class="col card">
+      <div style="font-weight:900; margin-bottom:8px;">Summary</div>
+      <div style="color:var(--muted);">Total local students: <b>{{ total_students }}</b></div>
+      <div style="color:var(--muted);">Verified local: <b>{{ verified_count }}</b></div>
+      <div style="color:var(--muted);">Latest block: <b>{{ latest_block.number if latest_block and latest_block.number is not none else '' }}</b></div>
+    </div>
+  </div>
+
+  <div style="height:16px"></div>
+
+  <div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+      <div>
+        <div style="font-weight:900;">Actions</div>
+        <div style="color:var(--muted); font-size:13px;">Manage students & verify on-chain data.</div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="" href="{{ url_for('add_student') }}"><button type="button">Add student</button></a>
+        <a class="" href="{{ url_for('verify') }}"><button type="button">Verify</button></a>
+        <a class="" href="{{ url_for('export_pdf') }}?q="><button type="button">Export PDF</button></a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
